@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PensionCalculationEngine.Api", "PensionCalculationEngine.Api\PensionCalculationEngine.Api.csproj", "{AE684ADB-090A-4190-8FE5-819C1BA95095}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PensionCalculationEngine.Domain", "PensionCalculationEngine.Domain\PensionCalculationEngine.Domain.csproj", "{600B2B3E-ABF4-4E00-8CAF-3F94973D3B29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PensionCalculationEngine.Shared", "PensionCalculationEngine.Shared\PensionCalculationEngine.Shared.csproj", "{F8037C7C-89D3-45A4-AC1E-FE3824DF6534}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE684ADB-090A-4190-8FE5-819C1BA95095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE684ADB-090A-4190-8FE5-819C1BA95095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE684ADB-090A-4190-8FE5-819C1BA95095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE684ADB-090A-4190-8FE5-819C1BA95095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{600B2B3E-ABF4-4E00-8CAF-3F94973D3B29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{600B2B3E-ABF4-4E00-8CAF-3F94973D3B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{600B2B3E-ABF4-4E00-8CAF-3F94973D3B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{600B2B3E-ABF4-4E00-8CAF-3F94973D3B29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8037C7C-89D3-45A4-AC1E-FE3824DF6534}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8037C7C-89D3-45A4-AC1E-FE3824DF6534}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8037C7C-89D3-45A4-AC1E-FE3824DF6534}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8037C7C-89D3-45A4-AC1E-FE3824DF6534}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
