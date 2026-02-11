@@ -14,6 +14,6 @@ public static class DomainLayerRegistration
         services.AddScoped<IDossierService, DossierService>();
         services.AddScoped<ICreateDossierService, CreateDossierService>();
         services.AddScoped<IAddPolicyService, AddPolicyService>();
+        services.AddScoped<IAddIndexationService, AddIndexationService>();
     }
-    
 }

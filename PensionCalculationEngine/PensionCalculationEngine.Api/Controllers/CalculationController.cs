@@ -13,17 +13,19 @@ public class CalculationController : ControllerBase
     private readonly IDossierService _dossierService;
     private readonly ICreateDossierService _createDossierService;
     private readonly IAddPolicyService _addPolicyService;
+    private readonly IAddIndexationService _addIndexationService;
     private readonly CalculationResponse calculationResponse;
     
     public CalculationController(
         IDossierService dossierService,
         ICreateDossierService createDossierService, 
-        CalculationResponse calculationResponse, IAddPolicyService addPolicyService)
+        CalculationResponse calculationResponse, IAddPolicyService addPolicyService, IAddIndexationService addIndexationService)
     {
         _dossierService = dossierService;
         _createDossierService = createDossierService;
         this.calculationResponse = calculationResponse;
         _addPolicyService = addPolicyService;
+        _addIndexationService = addIndexationService;
     }
     
     [HttpPost]
@@ -53,6 +55,9 @@ public class CalculationController : ControllerBase
 
         mutationGroups.TryGetValue(Domain.Common.Constants.MutationDefinitions.AddPolicy, out mutationGroupToProcess);
         _addPolicyService.AddPolicies(mutationGroupToProcess ?? []);
+
+        mutationGroups.TryGetValue(Domain.Common.Constants.MutationDefinitions.ApplyIndexation, out mutationGroupToProcess);
+        _addIndexationService.ApplyIndexation(mutationGroupToProcess ?? []);
 
         calculationResponse.CalculationResult.EndSituation.MutationIndex = calculationResponse.CalculationResult.Mutations.Count - 1;
             
