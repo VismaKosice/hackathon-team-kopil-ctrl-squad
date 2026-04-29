@@ -1,43 +1,39 @@
+using System.Text.Json.Serialization;
+using PensionCalculationEngine.Api.Endpoints;
+using PensionCalculationEngine.Api.Middleware;
 using PensionCalculationEngine.Domain.DependencyInjection;
+using PensionCalculationEngine.Domain.Json;
 
 namespace PensionCalculationEngine.Api;
 
-public class Program
+public static class Program
 {
     public static void Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        var builder = WebApplication.CreateSlimBuilder(args);
 
-        // Add services to the container.
-        builder.Services.AddAuthorization();
+        var port = Environment.GetEnvironmentVariable("PORT");
+        if (!string.IsNullOrWhiteSpace(port))
+        {
+            builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+        }
+        else
+        {
+            builder.WebHost.UseUrls("http://0.0.0.0:8080");
+        }
 
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
-
-        builder.Services.AddResponseCompression();
-
-        builder.Services
-            .AddControllers();
+        builder.Services.ConfigureHttpJsonOptions(static options =>
+        {
+            options.SerializerOptions.TypeInfoResolverChain.Insert(0, PensionJsonContextProvider.Default);
+            options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
+        });
 
         builder.Services.RegisterDomainLayer();
-        
+
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
-        
-        app.UseResponseCompression();
-
-        app.UseHttpsRedirection();
-
-        app.UseAuthorization();
-
-        app.MapControllers();
+        app.UseMiddleware<RequestTimingMiddleware>();
+        app.MapPost(CalculationEndpoint.Route, CalculationEndpoint.HandleAsync);
 
         app.Run();
     }
