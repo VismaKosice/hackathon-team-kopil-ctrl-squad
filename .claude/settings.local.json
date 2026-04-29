@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout *)",
+      "Bash(dotnet build *)",
+      "Bash(dotnet run *)",
+      "Bash(echo \"started pid=$!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8080/calculation-requests -X POST -H \"Content-Type: application/json\" -d '{}')",
+      "Bash(curl -sS -o /tmp/c01.json -w \"%{http_code}\\\\n\" -X POST http://localhost:8080/calculation-requests -H \"Content-Type: application/json\" --data-binary \"@test-cases/C01-create-dossier.json\")",
+      "Bash(curl *)",
+      "Bash(command -v jq)",
+      "Bash(command -v pwsh)",
+      "Bash(command -v powershell.exe)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File test-cases/run-tests.ps1 -BaseUrl http://localhost:8080)",
+      "Bash(powershell.exe *)",
+      "Bash(dotnet publish *)",
+      "Bash(docker --version)",
+      "Bash(docker info *)",
+      "Bash(docker build *)",
+      "Bash(docker rm *)",
+      "Bash(docker run *)",
+      "Bash(docker start *)",
+      "Bash(docker stats pension-engine *)"
+    ]
+  }
+}

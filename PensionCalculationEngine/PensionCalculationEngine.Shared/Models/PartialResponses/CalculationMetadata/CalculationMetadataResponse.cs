@@ -2,23 +2,24 @@ using System.Text.Json.Serialization;
 
 namespace PensionCalculationEngine.Shared.Models.PartialResponses.CalculationMetadata;
 
-public class CalculationMetadataResponse
+/// <summary>Top-level metadata about the calculation request and its outcome.</summary>
+public sealed class CalculationMetadataResponse
 {
     [JsonPropertyName("calculation_id")]
     public Guid CalculationId { get; set; }
-    
+
     [JsonPropertyName("tenant_id")]
-    public string TenantId { get; set; } 
-    
+    public string TenantId { get; set; } = string.Empty;
+
     [JsonPropertyName("calculation_started_at")]
     public DateTime CalculationStartedAt { get; set; }
-    
+
     [JsonPropertyName("calculation_completed_at")]
     public DateTime CalculationCompletedAt { get; set; }
-    
+
     [JsonPropertyName("calculation_duration_ms")]
     public long CalculationDurationMs { get; set; }
-    
+
     [JsonPropertyName("calculation_outcome")]
-    public string CalculationOutcome { get; set; } 
+    public string CalculationOutcome { get; set; } = string.Empty;
 }

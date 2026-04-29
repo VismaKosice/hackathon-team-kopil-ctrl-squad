@@ -1,19 +1,25 @@
 using Microsoft.Extensions.DependencyInjection;
-using PensionCalculationEngine.Domain.Services;
-using PensionCalculationEngine.Domain.Services.Contracts;
-using PensionCalculationEngine.Shared.Models;
+using PensionCalculationEngine.Domain.Mutations;
+using PensionCalculationEngine.Domain.Mutations.Handlers;
+using PensionCalculationEngine.Domain.SchemeRegistry;
 
 namespace PensionCalculationEngine.Domain.DependencyInjection;
 
 public static class DomainLayerRegistration
 {
-    public static void RegisterDomainLayer(this IServiceCollection services)
+    public static IServiceCollection RegisterDomainLayer(this IServiceCollection services)
     {
-        services.AddScoped<CalculationResponse>();
-        
-        services.AddScoped<IDossierService, DossierService>();
-        services.AddScoped<ICreateDossierService, CreateDossierService>();
-        services.AddScoped<IAddPolicyService, AddPolicyService>();
-        services.AddScoped<IAddIndexationService, AddIndexationService>();
+        services.AddHttpClient(nameof(SchemeRegistryClient));
+        services.AddSingleton<ISchemeRegistryClient, SchemeRegistryClient>();
+
+        services.AddSingleton<IMutationHandler, CreateDossierMutationHandler>();
+        services.AddSingleton<IMutationHandler, AddPolicyMutationHandler>();
+        services.AddSingleton<IMutationHandler, ApplyIndexationMutationHandler>();
+        services.AddSingleton<IMutationHandler, CalculateRetirementBenefitMutationHandler>();
+        services.AddSingleton<IMutationHandler, ProjectFutureBenefitsMutationHandler>();
+
+        services.AddSingleton<IMutationDispatcher, MutationDispatcher>();
+
+        return services;
     }
 }
